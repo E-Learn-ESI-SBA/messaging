@@ -1,35 +1,35 @@
-import { Schema, Document, model, models, Model} from "mongoose";
-import mongoose from "mongoose"
+import { Schema, Document, mongo } from 'mongoose';
+import mongoose from 'mongoose';
 interface Details {
-   width : any;
-   height: any;
-   size: any; 
+	width: number;
+	height: number;
+	size: number;
 }
 
 interface File {
-   type : any;
-   url: any;
-   size: any; 
-   details ?: Details;
+	type: mongoose.Schema.Types.String;
+	url: mongoose.Schema.Types.String;
+	size: mongoose.Schema.Types.Number;
+	details?: Details;
 }
 
 interface MessageTypes extends Document {
-  sender: mongoose.Schema.Types.ObjectId;
-  text: any;
-  chat:any;
-  file?: File;
+	sender: mongoose.Schema.Types.ObjectId;
+	text: mongoose.Schema.Types.String;
+	chatId: mongoose.Schema.Types.ObjectId;
+	file?: File;
 }
 
 // interface Details {
 //    width : string;
 //    height: string;
-//    size:string; 
+//    size:string;
 // }
 
 // interface File {
 //    type : string;
 //    url: string;
-//    size:string; 
+//    size:string;
 //    details ?: Details;
 // }
 
@@ -40,29 +40,26 @@ interface MessageTypes extends Document {
 //   file?: File;
 // }
 
-
-const MessageSchema : Schema<MessageTypes> = new Schema(
-  {
-    sender: { type: mongoose.Schema.Types.ObjectId , ref: "User" },
-    text: String,
-    chat:{ type: mongoose.Schema.Types.ObjectId, ref: "Chat" },
-    file: {
-      type: String,
-      url:String,
-      size: String,
-      details: {
-      width: String,
-      height:  String,
-      size:  String,
-      }
-    }
-  },
-{
-  timestamps: true
-}
+const MessageSchema: Schema<MessageTypes> = new Schema(
+	{
+		sender: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+		text: mongoose.Schema.Types.String,
+		chat: { type: mongoose.Schema.Types.ObjectId, ref: 'Chat' },
+		file: {
+			type: mongoose.Schema.Types.String,
+			url: mongoose.Schema.Types.String,
+			size: mongoose.Schema.Types.BigInt,
+			details: {
+				width: mongoose.Schema.Types.Number,
+				height: mongoose.Schema.Types.Number,
+				size: mongoose.Schema.Types.Number,
+			},
+		},
+	},
+	{
+		timestamps: true,
+	}
 );
 
-export const Message = mongoose.models.Message || mongoose.model("Message", MessageSchema);
-
-
-
+export const Message =
+	mongoose.models.Message || mongoose.model('Message', MessageSchema);
