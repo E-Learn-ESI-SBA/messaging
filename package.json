@@ -16,6 +16,7 @@
 		"@fastify/mongodb": "^8.0.0",
 		"dotenv": "^16.4.5",
 		"fastify": "^4.26.2",
+		"mongoose": "^8.3.4",
 		"ts-node": "^10.9.2"
 	},
 	"devDependencies": {
