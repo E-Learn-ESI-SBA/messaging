@@ -1,5 +1,7 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
-
+import User from '../models/user'
+import Chat from '../models/user'
+import {Message} from '../models/message'
 // export interface chat {
 //   name: string;
 //   isGroupChat : boolean;
@@ -46,31 +48,41 @@ fastify.post('/',{
         body: {
           type: "object",
           properties: {
-            content: { type: "string" },
-            roomId: { type: "string" },
+            text: { type: "string" },
+            chatId: { type: "string" },
           },
-          required: ["content", "roomId"],
+          required: ["text", "chatId"],
         },
       },
     }, async function (req : any , reply: FastifyReply) {
-   const Message = fastify.mongo.db?.collection('message')
-   const Room = fastify.mongo.db?.collection('room')
-  const { content, roomId  }  = req.body;
-
-  var newMessage = {
-    sender: req.user._id,
-    content: content,
-    chat: roomId,
-  };
-
+  const { text, chatId  }  = req.body;
+  console.log('message',req.body)
+// const Message = fastify.mongo.db?.collection('message')
   try {
-    var message = await Message?.insertOne(newMessage);
+  //   let message = await Message?.insertOne({
+  //   sender: Object("663aba6c8cdc7aa61f324b1a") ,
+  //   text: text,
+  //   chat: Object(chatId),
+  // });
+   let message = await Message.create({
+    sender: "663aba6c8cdc7aa61f324b1a" ,
+    // sender: req.user._id,
+    text: text,
+    chat: Object(chatId),
+  
+  });
+   console.log('mess',message)
 
-   //get user data and chat data then return it
+  // message = await message.populate("sender", "name avatar");
+  //   message = await message.populate("chat");
+  //   message = await User.populate(message, {
+  //     path: "chat.users",
+  //     select: "name avatar email",
+  //   });
 
-    await Room?.findOneAndUpdate(req.body.roomId, { latestMessage: message });
+  //   await Chat.findByIdAndUpdate(req.body.chatId, { latestMessage: message });
 
-    // reply.send();
+    reply.status(201).send(message);
   } catch (error) {
    reply.status(400);
     return error
