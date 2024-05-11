@@ -1,6 +1,6 @@
 import Fastify from 'fastify'
 import messageController from './routes/messageController';
-// import chatController from './routes/chatController';
+import chatController from './routes/chatController';
 import userController from './routes/userController';
 import mongoose from 'mongoose';
 const fastify = Fastify();
@@ -10,7 +10,7 @@ const fastify = Fastify();
 // fastify.register(auth);
 fastify.register(messageController, {prefix: '/message' } )
 fastify.register(userController, {prefix: '/user' } )
-// fastify.register(chatController, {prefix: '/room' } )
+fastify.register(chatController, {prefix: '/chat' } )
 
 
 
