@@ -1,8 +1,8 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
-import  UserModel  from "../models/user";
-import  ChatModel  from "../models/chat";
+import  UserModel  from "../../models/user";
+import  ChatModel  from "../../models/chat";
 const chatController = (fastify : FastifyInstance,options : any ,done : any ) => {
-  
+
 //work
 fastify.get('/', async function (req:any,reply){
  try {
