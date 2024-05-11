@@ -1,30 +1,38 @@
-import { Schema, Document, model, models, Model } from "mongoose";
-import mongoose from "mongoose"
-interface Chat extends Document {
+import {
+  getModelForClass,
+  modelOptions,
+  prop,
+  Ref
+} from "@typegoose/typegoose";
+import { User } from "./user";
+import { Message } from "./message";
+
+@modelOptions({
+  schemaOptions: {
+    timestamps: true,
+  }
+})
+export class Chat {
+  @prop({ trim : true })
   chatName: string;
-  isGroup: boolean;
-  avatar?: string;
-  users : string[];
-  latestMessage : string;
-  admin : string;
+
+  @prop({ default : false })
+  isGroup: Boolean;
+
+  @prop()
+  avatar: string;
+
+  @prop({ ref: () => User })
+  users: Ref<User>[];
+
+  @prop({ ref: () => User })
+  admin: Ref<User>;
+
+  @prop({ ref: () => Message })
+  latestMessage: Ref<Message>;
+
 }
 
-const ChatSchema: Schema<Chat> = new Schema(
-  {
-    chatName: { type: String, trim: true },
-    isGroup: { type: Boolean, default: false },
-    avatar : {type : String},
-    users: [{ type: mongoose.Schema.Types.userId, ref: "User" }],
-    latestMessage: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Message",
-    },
-    admin: { type: mongoose.Schema.Types.userId, ref: "User" },
-  },
-  { timestamps: true }
-);
+const ChatModel = getModelForClass(Chat);
 
-const Chat = models.Chat || model("Chat", UserSchema)
-
-export default Chat
-
+export default ChatModel;

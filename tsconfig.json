@@ -9,11 +9,14 @@
     "resolveJsonModule": true,
     "removeComments": true,
     "newLine": "lf",
-    "noUnusedLocals": true,
+    "noUnusedLocals": false,
     "noFallthroughCasesInSwitch": true,
-    "isolatedModules": true,
+    "isolatedModules": false,
     "forceConsistentCasingInFileNames": true,
+    "experimentalDecorators": true,
+    "strictPropertyInitialization": false,
     "skipLibCheck": true,
+    "emitDecoratorMetadata": true,
     "lib": [
       "ESNext"
     ]
