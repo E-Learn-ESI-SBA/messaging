@@ -1,24 +1,29 @@
-import { Schema, Document, model, models, Model } from "mongoose";
-import mongoose from "mongoose"
-interface User extends Document {
-  userId: string;
+import {
+  getModelForClass,
+  modelOptions,
+  prop,
+} from "@typegoose/typegoose";
+@modelOptions({
+  schemaOptions: {
+    timestamps: true,
+  }
+})
+export class User {
+  
+  @prop({ unique: true,required:true})
+  userId: string;	
+
+  @prop({ required : true })
   name: string;
+
+  @prop({ required: true,unique: true })
   email: string;
-  avatar?: string;
+
+  @prop()
+  avatar: string;
+
 }
 
-const UserSchema: Schema<User> = new Schema(
-  {
-    userId: { type: String, unique: true, required: true },
-    name: { type: String, required: true },
-    email: { type: String, unique: true, required: true },
-    avatar: {
-      type: String,
-    },
-  },
-  { timestamps: true }
-);
+const UserModel = getModelForClass(User);
 
-const User: Model<User> = models.User || model<User>("User", UserSchema);
-
-export default User;
+export default UserModel;
