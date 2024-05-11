@@ -1,6 +1,6 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
-import ChatModel from '../models/chat'
-import MessageModel from '../models/message'
+import ChatModel from '../../models/chat'
+import MessageModel from '../../models/message'
 
 
 const messageController = (fastify : FastifyInstance,options : any ,done : any ) => {
