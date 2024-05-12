@@ -1,10 +1,8 @@
-// import { getUsersOpts, getUserOpts } from "./options/index.js";
-// import { getUsers, getUser, getMe } from "../../controllers/users/index.js";
-// import { FastifyInstance } from "fastify";
+import { renameChatOpts } from "./rename-chat";
+import { createGroupOpts } from "./create-group";
+import { addMemberOpts } from "./add-member";
+import { removeMemberOpts } from "./remove-member";
+import { getUserChatsOpts } from "./get-user-chats";
+import { deleteChatOpts } from "./delete-chat";
 
-// export const usersRoutes = function (fastify: FastifyInstance, opts : any, done : any) {
-//   fastify.get("/", getUsersOpts(getUsers, fastify));
-//   fastify.get("/:id", getUserOpts(getUser, fastify));
-//   fastify.get("/me", getUserOpts(getMe, fastify));
-//   done();
-// };
+export { deleteChatOpts , getUserChatsOpts,removeMemberOpts,addMemberOpts,createGroupOpts,renameChatOpts   };
