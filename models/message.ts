@@ -30,7 +30,7 @@ export class Message {
   @prop({ trim: true })
   text: string;
 
-  @prop({ ref: 'Chat' })
+  @prop({ ref: () => Chat })
   chat: Ref<Chat>;
 
   @prop()

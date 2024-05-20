@@ -1,5 +1,5 @@
 import { FastifyReply } from "fastify";
-import  ChatModel  from "../../models/message";
+import  ChatModel  from "../../models/chat";
 export const renameChat = async function (req: any, res : FastifyReply) {
   // before check if user is admin for group
  const { chatId, chatName } = req.body;

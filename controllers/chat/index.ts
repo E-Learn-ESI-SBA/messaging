@@ -4,5 +4,5 @@ import { removeMember } from './remove-member';
 import { renameChat } from './rename-chat';
 import { deleteChat } from './delete-chat';
 import { createGroupChat } from './create-group-chat';
-
-export { getUserChats,deleteChat,renameChat,removeMember,addMember,createGroupChat };
+import { oneToOneChat } from './one-to-one-chat';
+export { getUserChats,deleteChat,renameChat,removeMember,addMember,createGroupChat,oneToOneChat };

@@ -1,5 +1,5 @@
 import { FastifyReply } from "fastify";
-import  ChatModel  from "../../models/message";
+import  ChatModel  from "../../models/chat";
 export const removeMember = async function (req: any, res : FastifyReply) {
   try {
    // before check if user is admin

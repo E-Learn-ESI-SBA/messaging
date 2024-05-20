@@ -11,7 +11,7 @@ export const fastify = Fastify();
 setFastifyRoutes(fastify);
 
 mongoose
-  .connect('mongodb+srv://mfendi:FendiMohamed27@chatapp.2wl9r8k.mongodb.net/sample_mflix?retryWrites=true&w=majority&appName=chatapp', {
+  .connect('mongodb+srv://mfendi:FendiMohamed27@chatapp.2wl9r8k.mongodb.net/messaging?retryWrites=true&w=majority&appName=chatapp', {
   })
   .then(() => {
     const PORT = 8080;
