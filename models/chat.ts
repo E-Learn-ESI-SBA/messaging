@@ -28,7 +28,7 @@ export class Chat {
   @prop({ ref: () => User })
   admin: Ref<User>;
 
-  @prop({ ref: () => Message })
+  @prop({ ref:  'Message' })
   latestMessage: Ref<Message>;
 
 }

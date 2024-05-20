@@ -1,5 +1,5 @@
 import { FastifyReply } from "fastify";
-import  ChatModel  from "../../models/message";
+import  ChatModel  from "../../models/chat";
 export const createGroupChat = async function (req: any, res : FastifyReply) {
         let users = req.body.users;
 
@@ -13,7 +13,7 @@ export const createGroupChat = async function (req: any, res : FastifyReply) {
     const groupChat = await ChatModel.create({
       chatName: req.body.chatName,
       users: users,
-      isGroupChat: true,
+      isGroup: true,
       admin: req.body.admin,
       avatar: req.body.avatar
     });

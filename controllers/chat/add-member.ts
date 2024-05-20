@@ -1,5 +1,5 @@
 import { FastifyReply } from "fastify";
-import  ChatModel  from "../../models/message";
+import  ChatModel  from "../../models/chat";
 export const addMember = async function (req: any, res : FastifyReply) {
   try {
   const { chatId, userId } = req.body as {chatId : string, userId : string } ;
