@@ -30,7 +30,7 @@ export const sendMessage = async function (req: any, res : any) {
           chat: createdChat._id ,
         });
         const FullChat = await ChatModel.findByIdAndUpdate(createdChat._id,{latestMessage : message._id }, 
-          { new: true }).populate("users")
+          { new: true })
         res.status(201).send(FullChat);
     }
   } catch (error) {
