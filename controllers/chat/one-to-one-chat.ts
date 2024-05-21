@@ -2,15 +2,13 @@ import { FastifyReply } from "fastify";
 import  ChatModel  from "../../models/chat";
 import UserModel from "../../models/user";
 export const oneToOneChat = async function (req: any, res : FastifyReply) {
-    const { userId } = req.body;
    try {
-   
         let isChat = await ChatModel.find({
           isGroup: false,
           $and: [
             { users: { $elemMatch: { $eq: "664bc4f10e0d0506d19c60c7"} } },
             // { users: { $elemMatch: { $eq: req.user._id } } },
-            { users: { $elemMatch: { $eq: userId } } },
+            { users: { $elemMatch: { $eq: req.params.userId } } },
           ],
         })
           .populate("users")
