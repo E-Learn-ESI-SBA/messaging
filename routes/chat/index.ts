@@ -4,7 +4,7 @@ import { getUserChats,deleteChat,renameChat,removeMember,addMember,createGroupCh
 import { oneToOneOpts } from "./options/one-to-one-chat";
 export const chatRoutes = function (fastify: FastifyInstance, opts : any, done : any) {
   //get two users chat still not done  
-  fastify.post("/", oneToOneOpts(oneToOneChat, fastify));
+  fastify.get("/:userId", oneToOneOpts(oneToOneChat, fastify));
   fastify.post("/group", createGroupOpts(createGroupChat, fastify));
   fastify.get("/", getUserChatsOpts(getUserChats, fastify));
   fastify.patch("/rename", renameChatOpts(renameChat, fastify));
