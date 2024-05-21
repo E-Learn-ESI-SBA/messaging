@@ -7,6 +7,7 @@ export const sendMessageOpts = (handler : any, fastify: FastifyInstance) => ({
           properties: {
             text: { type: "string" },
             chatId: { type: "string" },
+            userId: {type:"string"}
           },
           required: ["text", "chatId"],
         },
