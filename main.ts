@@ -1,13 +1,11 @@
-import Fastify, { FastifyReply, FastifyRequest } from 'fastify'
+import Fastify from 'fastify';
 import mongoose from 'mongoose';
 import { setFastifyRoutes } from "./routes";
-
+import { setFastifyCors } from './config/cors';
 
 export const fastify = Fastify();
 
-
-
-
+setFastifyCors(fastify);
 setFastifyRoutes(fastify);
 
 mongoose
