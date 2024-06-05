@@ -5,8 +5,8 @@ import { fileURLToPath } from "node:url";
 import { AutoloadPluginOptions } from "@fastify/autoload";
 import fastifyEnv from "@fastify/env";
 import { ConfigSchema } from "./types/config.js";
-import {routerSetter} from "./routes/index.js";
-
+import { routerSetter } from "./routes/index.js";
+import KafkaPlugin from "./plugins/kafka.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 export type AppOptions = {} & Partial<AutoloadPluginOptions>;
@@ -34,28 +34,28 @@ const app: FastifyPluginAsync<AppOptions> = async (
           : undefined,
     })
     .after(async () => {
-      await mongoose
-        .connect(fastify.config.MONGO_URI, {})
-        fastify.log.info("Connected to MongoDB");
-
+      await mongoose.connect(fastify.config.MONGO_URI, {});
+      fastify.log.info("Connected to MongoDB");
     })
     .after(() => {
-        // register routes
-        fastify.register(routerSetter);
-
-
-
+      fastify.register(KafkaPlugin, {
+        broker: fastify.config.KAFKA_BROKER,
+        groupId: fastify.config.KAFKA_GROUP_ID,
+        clientId: "message-service",
+      });
+    })
+    .after(() => {
+      fastify.register(routerSetter);
     });
 };
 
-
 const fastify = Fastify({
-    logger: true,
+  logger: true,
 });
 // Env
 
 app(fastify, {
-    ...options,
+  ...options,
 });
 
 export default app;

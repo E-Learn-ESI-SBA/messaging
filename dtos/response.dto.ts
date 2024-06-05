@@ -1,6 +1,4 @@
-
-
-export class Response<T>  {
+export class Response<T> {
   private data: T;
   private status: number;
   private message: string;

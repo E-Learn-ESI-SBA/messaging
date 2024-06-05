@@ -1,4 +1,4 @@
-import {FastifyInstance, preHandlerHookHandler} from "fastify";
+import { FastifyInstance, preHandlerHookHandler } from "fastify";
 import { ValidateToken } from "../lib/jwt.js";
 
 export const AuthMiddleware = (

@@ -22,7 +22,7 @@ export class Message {
   @prop()
   file: {
     url: string;
-    size:string;
+    size: string;
     ext: string;
   };
 }

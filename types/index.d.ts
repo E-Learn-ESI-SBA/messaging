@@ -13,6 +13,8 @@ declare module "fastify" {
       KAFKA_BROKER: string;
       JWT_SECRET: string;
       NODE_ENV: string;
+      KAFKA_GROUP_ID: string;
+      KAFKA_TOPIC: string;
     };
   }
   interface FastifyRequest {
