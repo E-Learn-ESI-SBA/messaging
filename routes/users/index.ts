@@ -1,6 +1,6 @@
-import { addUserOpts, updateUserOpts,deleteUserOpts } from "./options";
-import { addUser, updateUser, deleteUser } from "../../controllers/user";
+import { addUser, updateUser, deleteUser } from "../../controllers/user/index.js";
 import { FastifyInstance } from "fastify";
+import {addUserOpts, deleteUserOpts, updateUserOpts} from "./options/index.js";
 
 export const usersRoutes = function (fastify: FastifyInstance, opts : any, done : any) {
   fastify.post("/", addUserOpts(addUser, fastify));

@@ -1,4 +1,4 @@
-import  UserModel  from "../../models/user";
+import  UserModel  from "../../models/user.js";
 export const addUser = async function (req: any, res : any) {
    const { name,email,avatar,userId  }  = req.body;
   try {

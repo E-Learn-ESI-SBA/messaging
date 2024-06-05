@@ -1,4 +1,4 @@
-import  UserModel from "../../models/user";
+import  UserModel from "../../models/user.js";
 
 export const deleteUser = async function (req:any, res:any) {
  try {
