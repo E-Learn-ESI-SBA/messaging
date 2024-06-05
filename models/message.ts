@@ -1,49 +1,31 @@
 import {
   getModelForClass,
   modelOptions,
+  Plugins,
   prop,
-  Ref
+  Ref,
 } from "@typegoose/typegoose";
-import { User } from "./user";
-import { Chat } from "./chat";
-
-class FileDetails {
-  @prop()
-  width: string;
-
-  @prop()
-  height: string;
-
-  @prop()
-  size: string;
-}
+import { User } from "./user.js";
+import autopopulate from "mongoose-autopopulate";
 
 @modelOptions({
   schemaOptions: {
     timestamps: true,
-  }
+  },
 })
+@Plugins(autopopulate as any)
 export class Message {
   @prop({ ref: () => User })
-  sender: Ref<User>;	
-
-  @prop({ trim: true })
+  sender: Ref<User>;
+  @prop({ trim: true, maxlength: 250, required: false })
   text: string;
-
-  @prop({ ref: () => Chat })
-  chat: Ref<Chat>;
-
   @prop()
   file: {
-    type: string;
     url: string;
-    size: string;
-    details: FileDetails;
+    size:string;
+    ext: string;
   };
 }
 
-
-
 const MessageModel = getModelForClass(Message);
-
 export default MessageModel;

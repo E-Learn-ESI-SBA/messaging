@@ -1,8 +1,9 @@
-import { getUserChats } from './get-user-chats';
-import { addMember } from './add-member';
-import { removeMember } from './remove-member';
-import { renameChat } from './rename-chat';
-import { deleteChat } from './delete-chat';
-import { createGroupChat } from './create-group-chat';
-import { oneToOneChat } from './one-to-one-chat';
-export { getUserChats,deleteChat,renameChat,removeMember,addMember,createGroupChat,oneToOneChat };
+import {getChatById,getChatByUserId,getChats} from "./select.js"
+import {createGroupChat} from "./create.js"
+import {EditChat} from "./update.js"
+import {deleteChat} from "./delete.js"
+import {addMember} from "./add-member.js"
+
+export {
+  getChatByUserId,getChatById,createGroupChat,deleteChat,EditChat,addMember,getChats
+}

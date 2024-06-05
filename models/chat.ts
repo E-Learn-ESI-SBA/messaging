@@ -1,36 +1,31 @@
 import {
   getModelForClass,
   modelOptions,
+  plugin,
   prop,
-  Ref
+  Ref,
 } from "@typegoose/typegoose";
-import { User } from "./user";
-import { Message } from "./message";
+import { User } from "./user.js";
+import { Message } from "./message.js";
+import autopopulate from "mongoose-autopopulate";
 
 @modelOptions({
   schemaOptions: {
     timestamps: true,
-  }
+  },
 })
+@plugin(autopopulate as any)
 export class Chat {
-  @prop({ trim : true })
+  @prop({ trim: true })
   chatName: string;
-
-  @prop({ default : false })
+  @prop({ default: false })
   isGroup: Boolean;
-
   @prop()
   avatar: string;
-
-  @prop({ ref: () => User })
+  @prop({ autopopulate: true, ref: () => User })
   users: Ref<User>[];
-
-  @prop({ ref: () => User })
-  admin: Ref<User>;
-
-  @prop({ ref:  'Message' })
-  latestMessage: Ref<Message>;
-
+  @prop({ autopopulate: true, ref: () => Message })
+  messages: Ref<Message>[];
 }
 
 const ChatModel = getModelForClass(Chat);
