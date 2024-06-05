@@ -5,6 +5,7 @@
   "description": "",
   "main": "app.ts",
   "scripts": {
+    "start": "npm run build:ts && fastify start -l info dist/app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc -p tsconfig.json",
     "start:dev": "nodemon app.ts",
