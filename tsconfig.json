@@ -17,8 +17,6 @@
     "strictPropertyInitialization": false,
     "skipLibCheck": true,
     "emitDecoratorMetadata": true,
-    "lib": [
-      "ESNext"
-    ]
+    "lib": ["ESNext"]
   }
 }

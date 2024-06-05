@@ -1,11 +1,71 @@
-import { sendMessageOpts, deleteMessageOpts,getMessagesOpts,updateMessageOpts } from "./options";
-import { sendMessage, updateMessage, deleteMessage,getMessages } from "../../controllers/message";
-import { FastifyInstance } from "fastify";
-
-export const messagesRoutes = function (fastify: FastifyInstance, opts : any, done : any) {
-  fastify.post("/", sendMessageOpts(sendMessage, fastify));
-  fastify.get("/:chatId", getMessagesOpts(getMessages, fastify));
-  fastify.patch("/:messageId", updateMessageOpts(updateMessage, fastify));
-  fastify.delete("/:messageId", deleteMessageOpts(deleteMessage, fastify));
-  done();
+import {
+  sendMessage,
+  updateMessage,
+  deleteMessage,
+  getMessages,
+} from "../../controllers/message/index.js";
+import { FastifyPluginAsync, FastifyPluginOptions } from "fastify";
+export const messagePlugin: FastifyPluginAsync = async (
+  fastify,
+  opts: FastifyPluginOptions,
+) => {
+  fastify.route({
+    url: "/",
+    method: "POST",
+    schema: {
+      body: {
+        type: "object",
+        properties: {
+          text: { type: "string" },
+          chatId: { type: "string" },
+          userId: { type: "string" },
+        },
+        required: ["text", "chatId"],
+      },
+    },
+    handler: sendMessage,
+  });
+  fastify.route({
+    url: "/:chatId",
+    method: "GET",
+    schema: {
+      params: {
+        type: "object",
+        properties: {
+          chatId: { type: "string" },
+        },
+        required: ["chatId"],
+      },
+    },
+    handler: getMessages,
+  });
+  fastify.route({
+    url: "/:messageId",
+    method: "PATCH",
+    schema: {
+      body: {
+        type: "object",
+        properties: {
+          text: { type: "string" },
+        },
+        required: ["text"],
+      },
+      params: { messageId: { type: "string" } },
+    },
+    handler: updateMessage,
+  });
+  fastify.route({
+    url: "/:messageId",
+    method: "DELETE",
+    schema: {
+      params: {
+        type: "object",
+        properties: {
+          messageId: { type: "string" },
+        },
+        required: ["messageId"],
+      },
+    },
+    handler: deleteMessage,
+  });
 };

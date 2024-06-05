@@ -1,13 +1,7 @@
-
-import { FastifyInstance } from 'fastify';
-import { usersRoutes } from './users';
-import { messagesRoutes } from './message';
-import { chatRoutes } from './chat';
-export const setFastifyRoutes = function (fastify: FastifyInstance) {
-  fastify.get("/", (_, res) => {
-    res.send(true);
-  });
-  fastify.register(usersRoutes, { prefix: "/users" });
-  fastify.register(messagesRoutes, { prefix: "/messages" });
+import { FastifyInstance } from "fastify";
+import { messagePlugin } from "./message/index.js";
+import { chatRoutes } from "./chat/index.js";
+export const routerSetter = function (fastify: FastifyInstance) {
+  fastify.register(messagePlugin, { prefix: "/messages" });
   fastify.register(chatRoutes, { prefix: "/chats" });
 };
