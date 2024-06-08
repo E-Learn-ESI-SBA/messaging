@@ -2,10 +2,12 @@ import "fastify";
 
 import { Consumer, Kafka, Producer } from "kafkajs";
 import { UserClaims } from "./config.ts";
+import {Server} from "socket.io";
+import {ClientToServerEvents, InterServerEvents, ServerToClientEvents, SocketData} from "../socket/events.js";
 declare module "fastify" {
   interface FastifyInstance {
-    firebase: firebase.app.App;
     kafka: Kafka;
+    socket:Server<ClientToServerEvents,ServerToClientEvents,InterServerEvents,SocketData>
     consumer: Consumer;
     producer: Producer;
     config: {

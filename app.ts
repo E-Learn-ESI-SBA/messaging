@@ -7,6 +7,9 @@ import fastifyEnv from "@fastify/env";
 import { ConfigSchema } from "./types/config.js";
 import { routerSetter } from "./routes/index.js";
 import KafkaPlugin from "./plugins/kafka.js";
+import fastifySocketIO from "./plugins/socket.js";
+import {ValidateToken} from "./lib/jwt.js";
+import {UserHandler} from "./socket/data.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 export type AppOptions = {} & Partial<AutoloadPluginOptions>;
@@ -44,15 +47,44 @@ const app: FastifyPluginAsync<AppOptions> = async (
         clientId: "message-service",
       });
     })
+      .after(() => {
+          fastify.register(fastifySocketIO)
+
+      })
     .after(() => {
       fastify.register(routerSetter);
-    });
+    }).ready(() => {
+        // Run consumers ...
+        fastify.socket.use(async (socket , next) => {
+            try {
+
+            const token = socket.handshake.auth.token;
+            if (!token) {
+                return next(new Error("Auth Error"));
+            }
+            const user  = await ValidateToken(token, fastify.config.JWT_SECRET);
+            if (user instanceof Error) {
+                return next(new Error("Auth Error"));
+            }
+            socket.data.user = user;
+            next()
+            }catch (e) {
+                return next(new Error("Auth Error"));
+            }
+
+        })
+
+          fastify.socket.on("connection",(socket) => {
+              console.log("connected")
+              const userHandler = new UserHandler()
+                userHandler.addUser(socket.data.user)
+          })
+      })
 };
 
 const fastify = Fastify({
   logger: true,
 });
-// Env
 
 app(fastify, {
   ...options,

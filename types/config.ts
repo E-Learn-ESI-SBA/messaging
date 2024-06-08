@@ -41,6 +41,17 @@ export interface UserClaims extends JWTPayload {
   group: string;
   year: string;
 }
+export const SystemUser : UserClaims = {
+    avatar: "",
+    email: "",
+    exp: 1718551400,
+    id: "f34c48ca-9404-4036-9026-917b4a1240e8",
+    role: "teacher",
+    username: "teacher",
+    group: "None",
+    year: "None"
+
+}
 /*
 {"token_type": "access",
   "exp": 1718551400,

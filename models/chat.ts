@@ -8,12 +8,12 @@ import {
 import { User } from "./user.js";
 import { Message } from "./message.js";
 import autopopulate from "mongoose-autopopulate";
-
 @modelOptions({
   schemaOptions: {
     timestamps: true,
   },
 })
+
 @plugin(autopopulate as any)
 export class Chat {
   @prop({ trim: true })
@@ -24,8 +24,10 @@ export class Chat {
   avatar: string;
   @prop({ autopopulate: true, ref: () => User })
   users: Ref<User>[];
-  @prop({ autopopulate: true, ref: () => Message })
+  @prop({ autopopulate: true, ref: () => Message})
   messages: Ref<Message>[];
+  @prop({unique:true})
+  identifier: string;
 }
 
 const ChatModel = getModelForClass(Chat);

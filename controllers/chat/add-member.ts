@@ -1,14 +1,10 @@
-import { FastifyReply } from "fastify";
+import {FastifyReply, RouteHandler} from "fastify";
 import ChatModel from "../../models/chat.js";
-export const addMember = async function (req: any, res: FastifyReply) {
+import {ChatService} from "../../services/chat.js";
+export const addMember : RouteHandler= async function (req, res) {
   try {
     const { chatId, userId } = req.body as { chatId: string; userId: string };
-
-    // check if the requester is admin
-
-    const added = await ChatModel.findByIdAndUpdate(chatId, {
-      $push: { users: userId },
-    });
+    const added = ChatService.AddMember(chatId, userId);
     if (!added) {
       res.status(404).send({ message: "Chat Not Found" });
     } else {
