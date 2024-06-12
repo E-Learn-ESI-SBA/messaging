@@ -5,10 +5,18 @@ import UserModel from "../models/user.js";
 import {writeFile} from "node:fs"
 import {createHash } from "node:crypto"
 export  class MessageService {
-    public static  createMessage() {}
-    public static  deleteMessage() {}
-    public static  editMessage() {}
-    public static  getMessages() {}
+     public static async deleteMessage(messageId:string) {
+    return await MessageModel.findByIdAndDelete(messageId).exec();
+    }
+
+  public static async editMessage(messageId: string, newText: string) {
+      const result = await MessageModel.findByIdAndUpdate(
+        messageId,
+        { text: newText },
+        { new: true}
+      ).exec();
+      return result;
+  }
     public static async uploadFile(file:File, userId:string ) {
         console.log("Uploading file");
         const session = await  mongoose.startSession()
