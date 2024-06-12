@@ -1,5 +1,4 @@
 import { RouteHandler } from "fastify";
-import ChatModel from "../../models/chat.js";
 import {ChatService} from "../../services/chat.js";
 
 export const deleteChat: RouteHandler = async (req, replay) => {

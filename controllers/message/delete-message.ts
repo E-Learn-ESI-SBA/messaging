@@ -1,4 +1,4 @@
-import MessageModel from "../../models/message";
+import MessageModel from "../../models/message.js";
 export const deleteMessage = async function (req: any, res: any) {
   try {
     let message = await MessageModel.findById(req.params.messageId);

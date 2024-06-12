@@ -9,7 +9,7 @@ import { routerSetter } from "./routes/index.js";
 import KafkaPlugin from "./plugins/kafka.js";
 import fastifySocketIO from "./plugins/socket.js";
 import {ValidateToken} from "./lib/jwt.js";
-import {UserHandler} from "./socket/data.js";
+import { UserHandler } from "./services/realtime/user.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 export type AppOptions = {} & Partial<AutoloadPluginOptions>;
