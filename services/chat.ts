@@ -11,7 +11,7 @@ export class ChatService {
     }
 
     public static async AddMember(chatId: string, userId: string) {
-        const added = await ChatModel.findByIdAndUpdate(chatId, {
+       return  await ChatModel.findByIdAndUpdate(chatId, {
             $push: {users: userId},
         });
     }

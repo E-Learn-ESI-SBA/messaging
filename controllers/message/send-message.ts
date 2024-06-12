@@ -1,5 +1,5 @@
-import ChatModel from "../../models/chat";
-import MessageModel from "../../models/message";
+import ChatModel from "../../models/chat.js";
+import MessageModel from "../../models/message.js";
 export const sendMessage = async function (req: any, res: any) {
   const { text, chatId, userId } = req.body;
   const userTokenId = "663aba6c8cdc7aa61f324b1a";

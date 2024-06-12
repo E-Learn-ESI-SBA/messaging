@@ -1,7 +1,6 @@
 import MessageModel from "../models/message.js";
 import mongoose from "mongoose";
 import {v4 as uuid4} from "uuid";
-import {UserClaims} from "../types/config.js";
 import UserModel from "../models/user.js";
 import {writeFile} from "node:fs"
 import {createHash } from "node:crypto"

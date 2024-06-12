@@ -1,5 +1,4 @@
-import {FastifyReply, RouteHandler} from "fastify";
-import ChatModel from "../../models/chat.js";
+import {RouteHandler} from "fastify";
 import {ChatService} from "../../services/chat.js";
 export const addMember : RouteHandler= async function (req, res) {
   try {

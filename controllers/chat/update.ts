@@ -1,4 +1,4 @@
-import w{ RouteHandler } from "fastify";
+import { RouteHandler } from "fastify";
 import { zodValidator } from "../../middleware/zod-validator.js";
 import { EditChatSchema } from "../../types/api/chat.js";
 import ChatModel from "../../models/chat.js";
